@@ -51,15 +51,16 @@ def getfasta(accessioncode , data, header):
     fasta = {'Header': header, 'Sequence': sequence}
     return fasta
 
-
+#given a sequence and a pattern
 def motifsearch(sequence, repattern):
     if not repattern:
-      repattern = r'([^p])([^pkrhw])([vlswfnq])([iltywfn])([fiy])([^pkrh])'
+      repattern = r'(?=([^p])([^pkrhw])([vlswfnq])([iltywfn])([fiy])([^pkrh]))'
     regex = re.compile(repattern.upper())
     matchlist = []
     for match in regex.finditer(sequence):
         matchlist.append(match)
         #print("%s: %s" % (match.start(), match.group()))
+        #returns a list containing matched characters and their positions
     return matchlist
 
 
@@ -86,9 +87,12 @@ def index():
                 matches = motifsearch(fasta['Sequence'], None)
                 outputmatch = []
                 outputpos = []
+                string = []
                 for items in matches:
                     outputpos.append(items.start())
-                    outputmatch.append(items.group())
+                    outputmatch.append("".join(items.group(1,2,3,4,5,6)))
+                    #for char in tuple:
+                    #    string.append(char)
                 print(outputheader)
                 print(outputsequence)
                 print(outputpos)
@@ -151,4 +155,4 @@ app.jinja_loader = template_loader
 
 # run the app
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0" ,port=80)
