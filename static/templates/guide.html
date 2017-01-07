@@ -7,20 +7,47 @@
     <title>Guide</title>
 </head>
 <body>
-<h2 class="col-sm-offset-5 col-sm-3 text-center"">Guide</h2>
-    <h4 class="col-sm-offset-5 col-sm-3 text-center"">How to use</h4>
-        <p class="col-sm-offset-5 col-sm-3 text-center"> To use this tool
-            enter either an acession or manually put in the sequence and header
+<h2 class="col-sm-offset-4 col-sm-4 text-center">Guide</h2>
+    <h4 class="col-sm-offset-4 col-sm-4 text-center">How to use</h4>
+        <p class="col-sm-offset-4 col-sm-4 text-center"> To use this tool
+            enter either an acession code for uniprot or manually put in the sequence and header
         </p>
 
-    <h4 class="col-sm-offset-5 col-sm-3 text-center"">Errors</h4>
-        <p class="col-sm-offset-5 col-sm-3 text-center">If you encounter internal server errors it is likely you are
+    <h4 class="col-sm-offset-4 col-sm-4 text-center">Use offline</h4>
+        <p class="col-sm-offset-4 col-sm-4 text-center"> To access offline make sure you have Python3, git and pip installed instructions here:
+            <ul class="col-sm-offset-4 col-sm-4 text-center">><a href="https://www.python.org/downloads/">Python3 (comes with pip)</a></ul>
+            <ul class="col-sm-offset-4 col-sm-4 text-center">><a href="https://git-scm.com/download/win">Git</a></ul>
+        </p>
+        <hr class="col-sm-offset-5 col-sm-2" size="1" style="margin-top: 0px; margin-bottom: 5px;" >
+        <p class="col-sm-offset-4 col-sm-4 text-center">
+            Once all of these packages are installed simply run "git clone https://github.com/SpewnBomb/BITOOL" in a terminal window
+            then install the dependancies flask and ginja either by running "pip install -r /path/to/BITOOL/requirements.txt" where "/path/to/" is the path for the BITOOL folder or getting them manually
+            then simply run the web.py file and visit your localhost in the browser (on chrome type in localhost in the web bar)
+        </p>
+
+    <h4 class="col-sm-offset-4 col-sm-4 text-center">Errors</h4>
+        <p class="col-sm-offset-4 col-sm-4 text-center">If you encounter internal server errors it is likely you are
             trying to access an accesion that has not been populated by uniprot.
         </p>
-            <hr>
-        <p class="col-sm-offset-5 col-sm-3 text-center">
-            most errors in the input form will produce an error message below the submit button
+            <hr class="col-sm-offset-5 col-sm-2" size="1" style="margin-top: 0px; margin-bottom: 5px;" >
+        <p class="col-sm-offset-4 col-sm-4 text-center">
+            Most errors in the input form will produce an error message below the submit button
         </p>
+
+    <h4 class="col-sm-offset-4 col-sm-4 text-center">How it works</h4>
+        <p class="col-sm-offset-4 col-sm-4 text-center">Python - the language it's written in</p>
+            <hr class="col-sm-offset-5 col-sm-2" size="1" style="margin-top: 0px; margin-bottom: 5px;" >
+        <p class="col-sm-offset-4 col-sm-4 text-center">Flask - allows a simple server to be run from within a python app</p>
+            <hr class="col-sm-offset-5 col-sm-2" size="1" style="margin-top: 0px; margin-bottom: 5px;" >
+        <p class="col-sm-offset-4 col-sm-4 text-center">Ginja2 - allows the input of varaibles from python into html</p>
+            <hr class="col-sm-offset-5 col-sm-2" size="1" style="margin-top: 0px; margin-bottom: 5px;" >
+        <p class="col-sm-offset-4 col-sm-4 text-center">HTML with Bootstrap - Bootstraps allow for easy formatiing of html webpages</p>
+            <hr class="col-sm-offset-5 col-sm-2" size="1" style="margin-top: 0px; margin-bottom: 5px;" >
+        <p class="col-sm-offset-4 col-sm-4 text-center">Regex - used to search for the motif using a regular expression</p>
+            <hr class="col-sm-offset-5 col-sm-2" size="1" style="margin-top: 0px; margin-bottom: 5px;" >
+        <p class="col-sm-offset-4 col-sm-4 text-center">AWS EC2 - Amazons Infrastructure as a service EC2 as part of their amazon web services for </p>
+            <hr class="col-sm-offset-5 col-sm-2" size="1" style="margin-top: 0px; margin-bottom: 5px;" >
+        <p class="col-sm-offset-4 col-sm-4 text-center">Github - Git and github were used for version control so the same app could be cloned</p>
 
 
 </body>
