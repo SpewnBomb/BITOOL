@@ -5,10 +5,13 @@ import urllib
 
 app = Flask(__name__)
 
-
+#test variable
 var = "variable"
+#accession gloabl
 acession = ""
+#default patter
 pattern = r'([^p])([^pkrhw])([vlswfnq])([iltywfn])([fiy])([^pkrh])'
+#global error
 errortext = ""
 
 
@@ -24,15 +27,17 @@ def validateinput(code):
         invalidcode = False
         return invalidcode
 
+#can either take an accession code or the raw data and header
 def getfasta(accessioncode , data, header):
-    # build url
+    #if raw input given make sure there arn't newline and spaces if the copied and pasted it
     if accessioncode == None:
         data = data.replace("\n", "")
         data = data.replace(" ", "")
         sequence = data
-    #fetch fasta
+    #if no raw input the build and fetch from url
     if data == None and header == None:
         url = "http://www.uniprot.org/uniprot/" + accessioncode + ".fasta"
+        #turn bytes into a workable string
         data = urllib.request.urlopen(url).read().decode('utf-8')
         header = urllib.request.urlopen(url).readline().decode('utf-8').replace('\n', '')
         header = header[3:]
@@ -40,7 +45,7 @@ def getfasta(accessioncode , data, header):
         data = data.replace("\n", "")
         # split around digit to find end of header
         datalist = re.split("\d", data)
-        # take everything after the version number and assign it to sequence
+        # take everything after the version number and assign it to sequence (could fail without version number but works for now)
         sequence = datalist[-1]
         # remove line referance
     # take the first line of the faster file as the header
@@ -51,7 +56,7 @@ def getfasta(accessioncode , data, header):
     fasta = {'Header': header, 'Sequence': sequence}
     return fasta
 
-#given a sequence and a pattern
+#given a sequence and a pattern possibly expandable to be passed own motif
 def motifsearch(sequence, repattern):
     if not repattern:
       repattern = r'(?=([^p])([^pkrhw])([vlswfnq])([iltywfn])([fiy])([^pkrh]))'
@@ -64,7 +69,7 @@ def motifsearch(sequence, repattern):
     return matchlist
 
 
-
+#flask stuff
 
 # url for hompage
 @app.route('/', methods=["GET", "POST"])
@@ -74,14 +79,14 @@ def index():
         acession = form.get("acession")
         header = form.get("header")
         fastaseq = form.get("fasta")
-        print(acession)
-        print(fastaseq)
-        print(header)
+        # print(acession)
+        # print(fastaseq)
+        # print(header)
         if acession:
             if validateinput(acession) != False:
-                print("sucess")
+                #print("sucess")
                 fasta = getfasta(acession, None, None)
-                print(fasta['Sequence'])
+                #print(fasta['Sequence'])
                 outputheader = fasta['Header']
                 outputsequence = (fasta['Sequence'])
                 matches = motifsearch(fasta['Sequence'], None)
@@ -93,10 +98,10 @@ def index():
                     outputmatch.append("".join(items.group(1,2,3,4,5,6)))
                     #for char in tuple:
                     #    string.append(char)
-                print(outputheader)
-                print(outputsequence)
-                print(outputpos)
-                print(outputmatch)
+                # print(outputheader)
+                # print(outputsequence)
+                # print(outputpos)
+                # print(outputmatch)
                 return render_template("index.html", error= "valid code submitted", resulthead=outputheader, resultseq=outputsequence, pattern=pattern, resultmatches=outputmatch, resultpos=outputpos)
             else:
                 return render_template("index.html", error="Error:not valid acession code")
@@ -104,7 +109,7 @@ def index():
         if fastaseq and header:
             print("fastasucess")
             fasta = getfasta(None, fastaseq, header)
-            print(fasta['Sequence'])
+            #print(fasta['Sequence'])
             outputheader = fasta['Header']
             outputsequence = (fasta['Sequence'])
             matches = motifsearch(fasta['Sequence'], None)
@@ -113,10 +118,10 @@ def index():
             for items in matches:
                 outputpos.append(items.start())
                 outputmatch.append(items.group())
-            print(outputheader)
-            print(outputsequence)
-            print(outputpos)
-            print(outputmatch)
+            #print(outputheader)
+            # print(outputsequence)
+            # print(outputpos)
+            # print(outputmatch)
             return render_template("index.html", error="valid code submitted", resulthead=outputheader,
                                    resultseq=outputsequence, pattern=pattern, resultmatches=outputmatch,
                                    resultpos=outputpos)
