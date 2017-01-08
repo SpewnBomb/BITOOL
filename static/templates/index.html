@@ -32,7 +32,7 @@
 
             <div class="col-sm-offset-5 col-sm-6" style="padding-top: 20px; word-wrap: break-word">
                 <h4 class="">Fasta sequence</h4>
-                <textarea form="inputform" id="fasta" name="fasta" style="height:200px; width:180px;"></textarea>
+                <textarea form="inputform" id="fasta" name="fasta" style="height:200px; width:180px;" placeholder="MAEPRQEFEVMEDHAGTYGLGDRKDQGGYTMHQDQEGDTDAGLKESPLQTPTEDGSEEPGSETSDAKSTPTAEDVTAPLVDEGAPGKQAAAQPHTEIPEGTTAEEAGIGDTPSLEDEAAGHVTQEPESGKVVQEGFLREPGPPGLSHQL"></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -43,7 +43,7 @@
     </form>
     <div  class="col-sm-offset-3">
     {% if error %}
-    {{error}}
+        <p style={{errorcolor}}" > {{error}}</p>
     {% endif %}
     {% if resulthead %}
     </div>

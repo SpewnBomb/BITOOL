@@ -102,9 +102,11 @@ def index():
                 # print(outputsequence)
                 # print(outputpos)
                 # print(outputmatch)
-                return render_template("index.html", error= "valid code submitted", resulthead=outputheader, resultseq=outputsequence, pattern=pattern, resultmatches=outputmatch, resultpos=outputpos)
+                color = "color:green;"
+                return render_template("index.html", error="valid code submitted" , errorcolor=color, resulthead=outputheader, resultseq=outputsequence, pattern=pattern, resultmatches=outputmatch, resultpos=outputpos)
             else:
-                return render_template("index.html", error="Error:not valid acession code")
+                color = "color:red;"
+                return render_template("index.html", error="Error: invalid acession code format",  errorcolor=color)
 
         if fastaseq and header:
             print("fastasucess")
@@ -122,13 +124,15 @@ def index():
             # print(outputsequence)
             # print(outputpos)
             # print(outputmatch)
-            return render_template("index.html", error="valid code submitted", resulthead=outputheader,
+            color = "color:green;"
+            return render_template("index.html", error="valid code submitted",errorcolor=color, resulthead=outputheader,
                                    resultseq=outputsequence, pattern=pattern, resultmatches=outputmatch,
                                    resultpos=outputpos)
 
         if acession != None and fastaseq != None and header != None:
-            error_string = "Error: No acession or fasta and header provided"
-            return render_template("index.html", error=error_string)
+            error_string = "Error: No acession or fasta and header were incomplete"
+            color = "color:red;"
+            return render_template("index.html", error=error_string,errorcolor=color)
 
 
     # define template amd pass ,template name = python name
