@@ -117,7 +117,7 @@ def index():
             outputpos = []
             for items in matches:
                 outputpos.append(items.start())
-                outputmatch.append(items.group())
+                outputmatch.append("".join(items.group(1, 2, 3, 4, 5, 6)))
             #print(outputheader)
             # print(outputsequence)
             # print(outputpos)
@@ -132,7 +132,7 @@ def index():
 
 
     # define template amd pass ,template name = python name
-    return render_template('index.html', variable=var)
+    return render_template('index.html')
 
 # url for download
 @app.route('/guide')
