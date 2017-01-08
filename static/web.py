@@ -27,6 +27,14 @@ def validateinput(code):
         invalidcode = False
         return invalidcode
 
+def validfasta(fasta):
+    amino_acid = re.compile("r'[CDSQKPTFAXGIELHRWMNYV\s?]*")
+    fasta = fasta.upper()
+    if(re.fullmatch(amino_acid,fasta)):
+        return True
+    else:
+        return False
+
 #can either take an accession code or the raw data and header
 def getfasta(accessioncode , data, header):
     #if raw input given make sure there arn't newline and spaces if the copied and pasted it
@@ -114,20 +122,25 @@ def index():
             #print(fasta['Sequence'])
             outputheader = fasta['Header']
             outputsequence = (fasta['Sequence'])
-            matches = motifsearch(fasta['Sequence'], None)
-            outputmatch = []
-            outputpos = []
-            for items in matches:
-                outputpos.append(items.start())
-                outputmatch.append("".join(items.group(1, 2, 3, 4, 5, 6)))
-            #print(outputheader)
-            # print(outputsequence)
-            # print(outputpos)
-            # print(outputmatch)
-            color = "color:green;"
-            return render_template("index.html", error="valid code submitted",errorcolor=color, resulthead=outputheader,
-                                   resultseq=outputsequence, pattern=pattern, resultmatches=outputmatch,
-                                   resultpos=outputpos)
+            if(validfasta(outputsequence)):
+                matches = motifsearch(fasta['Sequence'], None)
+                outputmatch = []
+                outputpos = []
+                for items in matches:
+                    outputpos.append(items.start())
+                    outputmatch.append("".join(items.group(1, 2, 3, 4, 5, 6)))
+                #print(outputheader)
+                # print(outputsequence)
+                # print(outputpos)
+                # print(outputmatch)
+                color = "color:green;"
+                return render_template("index.html", error="valid code submitted",errorcolor=color, resulthead=outputheader,
+                                       resultseq=outputsequence, pattern=pattern, resultmatches=outputmatch,
+                                       resultpos=outputpos)
+            else:
+                color = "color:red;"
+                return render_template("index.html", error="fasta sequence contained invlaid symbols", errorcolor=color,)
+
 
         if acession != None and fastaseq != None and header != None:
             error_string = "Error: No acession or fasta and header were incomplete"
