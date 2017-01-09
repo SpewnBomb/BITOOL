@@ -31,8 +31,11 @@ def validfasta(fasta):
     amino_acid = re.compile("r'[CDSQKPTFAXGIELHRWMNYV\s?]*")
     fasta = fasta.upper()
     if(re.fullmatch(amino_acid,fasta) == True):
+        print("fullmatchtruefasta")
         return True
+
     else:
+        print("falsefasta")
         return False
 
 #can either take an accession code or the raw data and header
