@@ -28,7 +28,7 @@ def validateinput(code):
         return invalidcode
 
 def validfasta(fasta):
-    amino_acid = re.compile("r'[CDSQKPTFAXGIELHRWMNYV\s?]*")
+    amino_acid = re.compile("r'[CDSQKPTFAXGIELHRWMNYV\s?\"?]*")
     fasta = fasta.upper()
     if(re.fullmatch(amino_acid,fasta) == True):
         print("fullmatchtruefasta")
