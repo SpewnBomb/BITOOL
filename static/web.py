@@ -30,7 +30,7 @@ def validateinput(code):
 def validfasta(fasta):
     amino_acid = re.compile("r'[CDSQKPTFAXGIELHRWMNYV\s?]*")
     fasta = fasta.upper()
-    if(re.fullmatch(amino_acid,fasta) != None):
+    if(re.fullmatch(amino_acid,fasta) == True):
         return True
     else:
         return False
